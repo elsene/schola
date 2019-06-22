@@ -1,7 +1,7 @@
 <?php
 function getDB() {
 	try {
-	$dbhost="q7cxv1zwcdlw7699.chr7pe7iynqr.eu-west-1.rds.amazonaws.com	";
+	$dbhost="q7cxv1zwcdlw7699.chr7pe7iynqr.eu-west-1.rds.amazonaws.com";
 	$dbuser="a5zoekzahyqy5nhy";
 	$dbpass="gtxh55xgasjwei22";
 	$dbname="m0y5tmhsdczc8dck";
