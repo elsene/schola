@@ -90,7 +90,7 @@ function getPatientConnexion($email,$password){
     $sql = "SELECT * FROM patient WHERE email =:email And password=:password";
     try{
 
-        $insert = json_decode($request->getBody());
+        //$insert = json_decode($request->getBody());
         $db=getDB();
         $stmt = $db->prepare($sql);
         $stmt->bindValue("email", $email);
