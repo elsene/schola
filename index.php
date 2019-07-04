@@ -20,6 +20,7 @@ $app->get('/patients/ko','getPatientsKO');
 $app->get('/patients','getPatients');  
 $app->get('/medecins','getMedecins');
 $app->get('/ActivitePatient/:id_medecin','getActivitePatient');
+$app->post('/activite','addActivite');
 
 
 
@@ -198,6 +199,34 @@ function getActivitePatient($id_medecin){
         echo json_encode($patient);
     }catch(PDOException $e){
         echo $e->getMessage();
+    }
+}
+
+
+function addActivite() {
+
+     $request = \Slim\Slim::getInstance()->request();
+    $insert = json_decode($request->getBody());
+
+
+    $sql = "INSERT INTO effectuer_activite (id_patient, id_activite, duree_activite,jours,position) VALUES (:id_patient, :id_activite, :duree_activite,:jours,:position)";
+    try{
+
+        $db=getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("id_patient",$insert->id_patient);
+        $stmt->bindParam("id_activite",$insert->id_activite);
+        $stmt->bindParam("duree_activite",$insert->duree_activite);
+                $stmt->bindParam("jours",$insert->jours);
+        $stmt->bindParam("position",$insert->position);
+
+
+        $status = $stmt->execute();
+        $db = null;
+        echo '{"status":'.$status.',"message":"Ajout réussi"}';
+    } 
+    catch(PDOException $e) {
+        echo '{"status": "0","message":"Echec ajout  : "'.$e->getMessage().'}';
     }
 }
 
