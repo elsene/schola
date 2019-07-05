@@ -19,7 +19,7 @@ $app->get('/activite','getActivite');
 $app->get('/patients/ko','getPatientsKO');  
 $app->get('/patients','getPatients');  
 $app->get('/medecins','getMedecins');
-$app->get('/ActivitePatient/:id_medecin','getActivitePatient');
+$app->get('/ActivitePatient/:id_patient','getActivitePatient');
 $app->post('/activite','addActivite');
 
 
@@ -184,14 +184,14 @@ function getMedecins() {
 }
 
 
-function getActivitePatient($id_medecin){
-    $sql = "SELECT distinct * FROM effectuer_activite,patient,suivre_patient,activite WHERE effectuer_activite.id_patient=patient.id  and activite.id=effectuer_activite.id_activite and suivre_patient.id_medecin=:id_medecin";
+function getActivitePatient($id_patient){
+    $sql = "SELECT * FROM effectuer_activite WHERE  effectuer_activite.id_patient=:id_patient";
     try{
 
        // $insert = json_decode($request->getBody());
         $db=getDB();
         $stmt = $db->prepare($sql);
-        $stmt->bindValue("id_medecin", $id_medecin);
+        $stmt->bindValue("id_patient", $id_patient);
 
         $stmt->execute();
         $patient = $stmt->fetchAll(PDO::FETCH_ASSOC);
