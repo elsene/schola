@@ -185,7 +185,7 @@ function getMedecins() {
 
 
 function getActivitePatient($id_patient){
-    $sql = "SELECT * FROM effectuer_activite WHERE  effectuer_activite.id_patient=:id_patient";
+    $sql = "SELECT * FROM effectuer_activite,patient WHERE  effectuer_activite.id_patient=:id_patient";
     try{
 
        // $insert = json_decode($request->getBody());
